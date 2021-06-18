@@ -1,3 +1,4 @@
-# App Design Demo
-This is a simple demo which shows how to create an app using HTML and Bootstrap for styling and 
-NodeJS/Express for the server infrastructure with EJS as the template engine.
+# Personal App - Player Tracker
+- Tracker for NBA player stats that updates live from an API, allowing fans to follow their favorite players easily as opposed to teams. 
+- Users can easily follow and unfollow players, as well as choose which metrics are displayed. 
+- Based on the day, the homepage will automatically update and display the users chosen players playing today. 
