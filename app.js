@@ -1,3 +1,15 @@
+const mongoose = require("mongoose");
+mongoose.connect(
+  "mongodb://localhost:27017/recipe_db",
+  {useNewUrlParser: true}
+);
+const db = mongoose.connection;
+
+db.once("open", () => {
+  console.log("Successfully connected to MongoDB using Mongoose!");
+});
+
+
 /*
   app.js -- This creates an Express webserver
 */
@@ -52,20 +64,92 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/demo", 
+app.get("/demo",
         function (req, res){res.render("demo");});
 
 app.get("/about", (request, response) => {
   response.render("about");
 });
 
+app.get("/userSettings", (request, response) => {
+  response.render("userSettings");
+});
+
 app.get("/form", (request,response) => {
   response.render("form")
+})
+
+app.post("/reflectFormData",(req,res) => {
+  res.locals.title = "Form Demo Page"
+  res.locals.name = req.body.fullname
+  res.locals.body = req.body
+  res.locals.demolist = [2,3,5,7,11,13]
+  res.render('reflectData')
+})
+
+app.get("/dataDemo", (request,response) => {
+  response.locals.name="Tim Hickey"
+  response.locals.vals =[1,2,3,4,5]
+  response.locals.people =[
+    {'name':'Tim','age':65},
+    {'name':'Yas','age':29}]
+  response.render("dataDemo")
 })
 
 app.post("/showformdata", (request,response) => {
   response.json(request.body)
 })
+
+app.post("/xxx", (request,response) => {
+  response.json(request.body)
+})
+
+app.get("/rest", (request,response) => {
+  response.render("rest")
+})
+
+app.post("/restData", (request,response) => {
+  response.json(request.body)
+})
+
+app.get("/triangleArea", (req, res) => {
+  response.render("triangleArea")
+})
+
+app.post("/calcTriangleArea", (req,res) => {
+  const a = parseFloat(req.body.a)
+  const b = parseFloat(req.body.b)
+  const c = parseFloat(req.body.c)
+  const s = (a+b+c)/2
+  const area = math.sqrt(s*(s-a)*(s-b)*(s-c))
+  res.locals.a = a
+  res.locals.b = b
+  res.locals.c = c
+  res.locals.area = area
+  res.render("showTriangleArea")
+})
+
+app.get('/playerSearch', (req,res) => { 
+  res.render('playerSearch') //formerly player is recipe
+})
+//formerly getRecipes
+app.post("/getPlayer",   async (req,res,next) => { 
+  try { 
+    const food = req.body.food 
+    const balldontlie = "https://www.balldontlie.io/api/v1/players?search="+food+"&per_page=100" 
+    const myAPI = await axios.get(balldontlie) 
+    console.dir(myAPI) 
+    console.dir(myAPI.data) 
+    console.log('results') 
+    console.log('results') 
+    console.dir(myAPI.data.data) 
+    res.locals.myAPI = myAPI.data.data
+    //res.json(result.data) 
+    res.render('displayPlayer') //formerly showRecipes
+  } catch(error){ 
+    next(error)     }
+ }) 
+
 
 // Here is where we will explore using forms!
 
@@ -75,7 +159,7 @@ app.post("/showformdata", (request,response) => {
 // and send it back to the browser in raw JSON form, see
 // https://covidtracking.com/data/api
 // for all of the kinds of data you can get
-app.get("/c19", 
+app.get("/c19",
   async (req,res,next) => {
     try {
       const url = "https://covidtracking.com/api/v1/us/current.json"
@@ -100,6 +184,104 @@ app.get("/omelet",
     }
 })
 
+// this shows how to use an API to get recipes
+// http://www.recipepuppy.com/about/api/
+// the example here finds omelet recipes with onions and garlic
+// app.get("/stats",
+// console.log("stats pressed")
+//   async (req,res,next) => {
+//     try {
+//       const url = "https://www.balldontlie.io/api/v1/stats"
+//       const result = await axios.get(url)
+//       console.log(result);
+//       res.json(result.data)
+//     } catch(error){
+//       next(error)
+//     }
+// })
+
+// fetch(url, {
+//     method: 'post',
+//     headers: {
+//       "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+//     },
+//     body: 'foo=bar&lorem=ipsum'
+//   })
+//   .then(json)
+//   .then(function (data) {
+//     console.log('Request succeeded with JSON response', data);
+//   })
+//   .catch(function (error) {
+//     console.log('Request failed', error);
+//   });
+
+app.get('/player', (req,res) => { 
+  res.render('player') //formerly player is recipe
+})
+
+var date = new Date();
+var year = date.getFullYear();
+var month = 1 + date.getMonth();
+var day = date.getDate();
+var dayMod = day-1
+var api_date = year + "-" + month + "-" + day
+var api_date_mod = year + "-" + month + "-" + dayMod
+//formerly getRecipes
+//<%= let trueShooting = player.pts/(2*(player.fga + 0.44 * player.fta)) %>
+
+
+//https://www.balldontlie.io/api/v1/players?search=tyrese%20haliburton
+app.post("/getPlayer",   async (req,res,next) => { 
+  try { 
+    //player name First Last
+    const player = req.body.player
+    let nameArray = player.split(" ")
+    let first_name = nameArray[0]
+    let last_name = nameArray[1]
+    const playerURL = "https://www.balldontlie.io/api/v1/players?search="+first_name+"%20"+last_name
+    const playerID = await axios.get(playerURL) 
+    let best = playerID.data.data
+    let best2 = best.map(player => player.id);
+    let player_id_number = best2[0]; //player ID number finally
+
+//https://www.balldontlie.io/api/v1/stats?player_ids[]=274&start_date=2021-6-8&per_page=100
+    const balldontlie = "https://www.balldontlie.io/api/v1/stats?player_ids[]="+player_id_number+"&start_date="+api_date_mod+"&per_page=100" 
+    const myAPI = await axios.get(balldontlie) 
+    console.dir(myAPI) 
+    console.dir(myAPI.data) 
+    console.log('results') 
+
+    console.log(api_date);
+    console.log(api_date_mod);
+    console.log('XXXXXXXXXXXXXXXXXXXXXXX') 
+    console.dir(myAPI.data.data) 
+    res.locals.myAPI = myAPI.data.data
+
+
+    //let player_id_number = best.map(a => a.id);
+    //console.log(player_id_number);
+    //res.json(result.data) 
+    res.render('showPlayer') //formerly showRecipes
+  } catch(error){ 
+    next(error)     }
+ }) 
+
+
+//dummy function to display all checked players
+const checkedPlayers = {
+            'durant':false,
+            'curry':false,
+            'jokic':true,
+            'james':false,
+            'lillard':true
+};
+
+for(var key in checkedPlayers){
+    if(checkedPlayers[key] == true)
+    console.log(key);
+  }
+
+
 // Don't change anything below here ...
 
 // here we catch 404 errors and forward to error handler
@@ -118,7 +300,7 @@ app.use(function(err, req, res, next) {
 });
 
 //Here we set the port to use
-const port = "5000";
+const port = "4000";
 app.set("port", port);
 
 // and now we startup the server listening on that port

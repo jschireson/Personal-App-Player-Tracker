@@ -1,0 +1,24 @@
+<%- include('bootheader') -%>
+
+<%- include('menubar') -%>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Rajdhani', sans-serif;
+}
+</style>
+
+    <div class="jumbotron">
+        <h1>Player finder</h1>
+    </div>
+
+<form method="post" action="/getPlayer">
+  Search for a player
+  <input type="text" name="food"><br>
+  <input type="submit">
+</form>
+
+<%- include('bootfooter') -%>

@@ -1,0 +1,49 @@
+<%- include('bootheader') -%>
+  <%- include('menubar') -%>  
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Rajdhani', sans-serif;
+}
+</style>
+
+<div class="jumbotron"> 
+  <h1>Player Finder</h1> 
+</div> <form method="post" action="/getPlayer"> 
+  Search for a player
+  <input type="text" name="food"><br> 
+  <input type="submit"> 
+</form>
+  <% myAPI.map((player) => {%> 
+  <h3> <%= player.first_name + " " + player.last_name%> </h3> 
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Player Info</th>
+      <th>Team Info</th>
+    </tr>
+    <tr>
+      <td>Player name: <%=player.first_name + " " + player.last_name%></td>
+      <td>Team name: <%= player.team.full_name %></td>
+    </tr>
+    <tr>
+      <td>Height: <%=player.height_feet + "'" + player.height_inches%></td>
+      <td>Conference: <%= player.team.conference %></td>
+    </tr>
+    <tr>
+      <td>Weight: <%=player.weight_pounds%></td>
+      <td>Abbreviation: <%= player.team.abbreviation %></td>
+    </tr>
+    <tr>
+      <td>Position: <%=player.position%></td>
+      <td>Division: <%= player.team.division %></td>
+    </tr>
+  </table>
+
+  <hr>
+ <%})%>  
+
+  <%- include('bootfooter') -%> 

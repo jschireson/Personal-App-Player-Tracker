@@ -1,59 +1,65 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-    <div class="jumbotron">
-        <h1>Tim Hickey</h1>
-        <p>Bio and Fact sheet</p>
-    </div>
-
-
-
-
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  body {
+  font-family: 'Rajdhani', sans-serif;
+  }
+  </style>
+</head>
 
 <div class="row">
-  
-  <div class="col bg-warning text-danger">
-    <p>
-      I am the chair of the Computer Science Department at Brandeis University.
-      I was a Brandeis undergrad in 1973-1977 then got my PhD at University
-        of Chicago in Mathematics.
-    </p>  
-    <p>
-      I grew in New Mexico from ages 5-17.
-    </p>
-    
-    <div class="bg-danger text-white">
-      <h2>
-        Places I lived ..
-      </h2>
-      <ul>
-        <li> Lincoln Nebraska</li>
-        <li> Albuquerque, NM</li>
-        <li> Las Cruces, NM</li>
-      </ul>         
-    </div>
-    
-    <h2>
-      Websites I like
-    </h2>
-    <ul>
-      <li> <a href="http://www.brandeis.edu">Brandeis</a></li>
-      <li> <a href="http://www.cs.brandeis.edu/~tim">My website</a></li>
-    </ul>
+  <div class="col">
+    <h3>Jacob Schireson</h3>
+    <img src="https://miro.medium.com/max/3150/2*pd_Fs1eEt88fRWn40kOlWw.jpeg"
+    class="myimg">
   </div>
-  
-  <div class="col"> 
-    <img src="https://www.cs.brandeis.edu/~tim/hickey-apr08.gif"
-     width="100%" alt="photo of Tim Hickey" >
-  </div>
-  
 </div>
 
+<br>
 
- <!-- 
+<p>Some facts</p>
+  <ul>
+    <li>I am a Computer Science and Philosophy student at Brandeis University.</li>
+    <li>I am from Palo Alto, CA.</li>
+    <li>Upon graduating, I plan to pursue a career in Software Engineering.</li>
+  </ul>
+
+<p>Some companies I'd like to work for</p>
+
+<hr>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>More Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Google</td>
+        <td><a href="https://about.google/">about.google</a></td>
+      </tr>
+      <tr>
+        <td>Future of Humanity Institute</td>
+        <td><a href="https://www.fhi.ox.ac.uk/">www.fhi.ox.ac.uk</a></td>
+      </tr>
+      <tr>
+        <td>Twitter</td>
+        <td><a href="https://about.twitter.com/">about.twitter.com</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+ <!--
   also add a list and some links
   to your bio,
-  and maybe a table ...    
+  and maybe a table ...
 -->
 
 <%- include('bootfooter') -%>

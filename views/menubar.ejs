@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">YellowCartwheel</a>
+<a class="navbar-brand" href="/">PlayerTracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,31 +8,45 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item ">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home</a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="/demo">Demo</a>
       </li>
-      
+
       <li class="nav-item">
-        <a class="nav-link" href="/about">Tim's Bio</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/form">Form Demo Page</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/c19">Covid-19 API demo</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/omelet">Recipe API demo</a>
+        <a class="nav-link" href="/userSettings">Settings</a>
       </li>
 
-    </ul>
+      <li class="nav-item">
+        <a class="nav-link" href="/player">Player Creator</a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link"><b>Add Player:</b></a>
+      </li>
 
+<form method="post" action="/showformdata" class="form-inline">
+  <div class="input-group">
+    <input type="text" class="form-control" name="playerName" placeholder="Firstname Lastname">
+    <div class="input-group-append">
+      <button class="btn btn-secondary"
+              type="submit">
+              <img
+              src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png"
+              alt=""
+              width="20px"
+              height="20px">
+      </button>
+    </div>
   </div>
+</form>
+
+<li class="nav-item">
+  <a class="nav-link" href="/about">About</a>
+</li>
+
+</ul>
+</div>
 </nav>

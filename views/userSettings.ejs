@@ -1,0 +1,185 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Rajdhani', sans-serif;
+}
+</style>
+</head>
+
+    <h1>Settings</h1>
+    <hr>
+
+<form method="post" action="/showformdata">
+<h4>My Players</h4>
+<table id = "settingsTable" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th width=10%>checkbox</th>
+      <th>Player</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox" name="player" value="durant"></td>
+      <td>Kevin Durant</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="player" value="curry"></td>
+      <td>Stephen Curry</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="player" value="jokic"></td>
+      <td>Nikola Jokic</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+
+function addRow() {
+   "use strict";
+
+    var table = document.getElementById("settingsTable");
+
+    var row= document.createElement("tr");
+    console.log(row);
+    var inputName = document.createElement("td");
+    var checkBox = document.createElement("INPUT");
+    checkBox.setAttribute("type", "checkbox");
+    inputName.innerHTML = document.getElementById("textBox").value;
+
+    row.appendChild(checkBox);
+    row.appendChild(inputName);
+
+    row.length += 1;
+
+
+
+
+
+    table.children[1].appendChild(row);
+};
+
+</script>
+
+
+<!-- <p>
+  <input type="button" class="btn btn-success btn-sm" onclick='selectAllPlayers()' value="Select All"/>
+  <input type="button" class="btn btn-danger btn-sm" onclick='UnSelectAllPlayers()' value="Unselect All"/>
+</p> -->
+
+
+<p>
+  <input type="button" onclick='selectAllPlayers()' value="Select All"/>
+  <input type="button" onclick='UnSelectAllPlayers()' value="Unselect All"/>
+</p>
+
+<hr>
+<h4>Statistics</h4>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th width=10%>checkbox</th>
+      <th>Statistics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="pts"></td>
+      <td>Points</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="reb"></td>
+      <td>Rebounds</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="ast"></td>
+      <td>Assists</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="stl"></td>
+      <td>Steals</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="blk"></td>
+      <td>Blocks</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" name="statistics" value="eff"></td>
+      <td>Efficiency</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- <p>
+  <input type="button" class="btn btn-success btn-sm" onclick='selectAllStats()' value="Select All"/>
+  <input type="button" class="btn btn-danger btn-sm" onclick='UnSelectAllStats()' value="Unselect All"/>
+</p> -->
+
+
+<p>
+  <input type="button" onclick='selectAllStats()' value="Select All"/>
+  <input type="button" onclick='UnSelectAllStats()' value="Unselect All"/>
+</p>
+
+<hr>
+
+<input type="submit" class="btn btn-success btn-sm" value="Save">
+
+</form>
+
+<br>
+
+<div class="input-group">
+  <input type="text" class="form-control" id = "textBox" name="playerName" placeholder="Firstname Lastname">
+  <div class="input-group-append">
+    <button class="btn btn-success" type="submit" onclick="addRow()">Add Row</button>
+  </div>
+</div>
+
+<title>JavaScript - Select/Unselect (Check/Uncheck) all CheckBoxes on Button Click.</title>
+		<script type="text/javascript">
+			function selectAllStats(){
+				var items=document.getElementsByName('statistics');
+				for(var i=0; i<items.length; i++){
+					if(items[i].type=='checkbox')
+						items[i].checked=true;
+				}
+			}
+
+			function UnSelectAllStats(){
+				var items=document.getElementsByName('statistics');
+				for(var i=0; i<items.length; i++){
+					if(items[i].type=='checkbox')
+						items[i].checked=false;
+				}
+			}
+		</script>
+
+
+    <title>JavaScript - Select/Unselect (Check/Uncheck) all CheckBoxes on Button Click.</title>
+    		<script type="text/javascript">
+    			function selectAllPlayers(){
+    				var items=document.getElementsByName('player');
+    				for(var i=0; i<items.length; i++){
+    					if(items[i].type=='checkbox')
+    						items[i].checked=true;
+    				}
+    			}
+
+    			function UnSelectAllPlayers(){
+    				var items=document.getElementsByName('player');
+    				for(var i=0; i<items.length; i++){
+    					if(items[i].type=='checkbox')
+    						items[i].checked=false;
+    				}
+    			}
+    		</script>
+
+<%- include('bootfooter') -%>

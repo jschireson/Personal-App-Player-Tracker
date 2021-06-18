@@ -1,0 +1,44 @@
+<%- include('bootheader') -%>
+
+<%- include('menubar') -%>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Rajdhani', sans-serif;
+}
+.myDiv {
+  border: 5px
+  outset <%= body.borderColor %>;
+  background-color: <%= body.favoriteColor %>;
+  text-align: center;
+  height: 200px;
+  width: 50%;
+}
+
+
+</style>
+
+    <div class="jumbotron">
+        <h1>
+            Happy Birthday <%= body.fullname %>!
+        </h1>
+<br>
+<div class="myDiv">
+
+
+   <h4>Dear <%= body.fullname %>,</h4><br>
+   I can’t believe how <%= body.adj1 %> I am to have found a friend like you.<br>
+   You make every day of my life so <%= body.adj2 %>.<br>
+   I know you'll continue to pursue <%= body.interest %>.<br>
+   It’s my goal to make sure your birthday is one of the <%= body.bw %> days ever.<br>
+   I can’t wait to celebrate with you!<br><br>
+
+   <h5>-<%= body.yourname %></h5>
+
+   </div>
+
+   <a href="/form">Write another card</a>
+<%- include('bootfooter') -%>
