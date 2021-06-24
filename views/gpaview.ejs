@@ -1,0 +1,80 @@
+<%- include('bootheader') -%>
+
+<head>
+
+    <div class="jumbotron">
+        <h1>
+            GPA for <%= body.fullname %> in <%= body.adj1 %>
+
+        </h1>
+        </div>
+
+<style>
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding-left: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+</head>
+<div class="row">
+  <div class="column" style="background-color:#e03444;">
+    <p>Comments</p>
+    <%= body.w3review %>
+  </div>
+  <div class="column" style="background-color:#ffc40c;">
+    <table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th scope="col">grade</th>
+      <th scope="col">number</th>
+      <th scope="col">points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td><%= body.a %></td>
+      <td><%= body.a*4 %></td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td><%= body.b %></td>
+      <td><%= body.b*3 %></td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td><%= body.c %></td>
+      <td><%= body.c*2 %></td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td><%= body.d %></td>
+      <td><%= body.d*1 %></td>
+    </tr>
+    <tr>
+      <td>E</td>
+      <td><%= body.e %></td>
+      <td><%= body.e*0 %></td>
+    </tr>
+  </tbody>
+</table><br>
+
+total grade points <%= body.a*4 + body.b*3 + body.c*2 + body.d*1 %><br>
+number of grades <%= body.a*1 + body.b*1 + body.c*1 + body.d*1 + body.e*1%><br>
+GPA <%= ((body.a*4 + body.b*3 + body.c*2 + body.d*1)/
+        (body.a*1 + body.b*1 + body.c*1 + body.d*1 + body.e*1)).toFixed(2)%><br>
+  </div>
+</div>
+
+<%- include('bootfooter') -%>

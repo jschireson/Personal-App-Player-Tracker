@@ -12,36 +12,31 @@ body {
 
 <div class="jumbotron"> 
   <h1>Player Finder</h1> 
-</div> <form method="post" action="/getPlayer"> 
+</div>
+
+ <form method="post" action="/getPlayer"> 
   Search for a player
   <input type="text" name="food"><br> 
   <input type="submit"> 
 </form>
-  <% myAPI.map((player) => {%> 
-  <h3> <%= player.first_name + " " + player.last_name%> </h3> 
 
-  <table class="table table-bordered table-striped">
-    <tr>
-      <th>Player Info</th>
-      <th>Team Info</th>
-    </tr>
-    <tr>
-      <td>Player name: <%=player.first_name + " " + player.last_name%></td>
-      <td>Team name: <%= player.team.full_name %></td>
-    </tr>
-    <tr>
-      <td>Height: <%=player.height_feet + "'" + player.height_inches%></td>
-      <td>Conference: <%= player.team.conference %></td>
-    </tr>
-    <tr>
-      <td>Weight: <%=player.weight_pounds%></td>
-      <td>Abbreviation: <%= player.team.abbreviation %></td>
-    </tr>
-    <tr>
-      <td>Position: <%=player.position%></td>
-      <td>Division: <%= player.team.division %></td>
-    </tr>
-  </table>
+  <% myAPI.map((player) => {%> 
+
+  <div class="content">
+      <img src="https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3202.png"/ alt="" >
+      <div class="playerBio">
+        <h3><%= player.first_name + " " + player.last_name%></h3>
+        <h4><b><%= player.team.abbreviation + " - " +  player.position%></b>
+        | <%=player.height_feet + "'" + player.height_inches + "\""%>
+        | <%=player.weight_pounds%></h4>
+        <!-- add game score -->
+      </div>
+
+      <div class="playerStats">
+        <button type="button" class="btn btn-success">Add</button>
+      </div>
+  </div>
+
 
   <hr>
  <%})%>  

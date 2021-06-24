@@ -1,0 +1,33 @@
+<%- include('bootheader') -%>
+<head>
+
+<div class="jumbotron"> 
+  <h1>GPA Calculator</h1> 
+  <p>Enter info about your GPA</p>
+</div> 
+
+<form method="post" action="/gpa">
+
+  <input type="text" name="fullname" placeholder="Tim Hickey" size="65"> Full Name <br>
+  <input type="number" name="a" placeholder="A"><br>
+  <input type="number" name="b" placeholder="B"><br>
+  <input type="number" name="c" placeholder="C"><br>
+  <input type="number" name="d" placeholder="D"><br>
+  <input type="number" name="e" placeholder="E"><br>
+
+  <select name="adj1">
+    <option>All</option>
+    <option>COSI</option>
+    <option>MATH</option>
+    <option>ECON</option>
+  </select>
+  Comments about your GPA?<br>
+  <textarea id="w3review" name="w3review" rows="2" cols="19">
+    These are my grades through my Sophomore
+</textarea><br>
+<input type="submit" value = "Submit">
+
+</form>
+
+
+<%- include('bootfooter') -%>

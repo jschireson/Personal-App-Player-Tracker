@@ -75,16 +75,26 @@ app.get("/userSettings", (request, response) => {
   response.render("userSettings");
 });
 
-app.get("/form", (request,response) => {
-  response.render("form")
+app.get("/gpaform", (request,response) => {
+  response.render("gpaform")
 })
 
-app.post("/reflectFormData",(req,res) => {
-  res.locals.title = "Form Demo Page"
+app.post("/gpa",(req,res) => {
+  const a = parseFloat(req.body.a)
+  const b = parseFloat(req.body.b)
+  const c = parseFloat(req.body.c)
+  const d = parseFloat(req.body.d)
+  const e = parseFloat(req.body.e)
+  const totalGrades = (a*4+b*3+c*2+d)
   res.locals.name = req.body.fullname
   res.locals.body = req.body
-  res.locals.demolist = [2,3,5,7,11,13]
-  res.render('reflectData')
+  res.locals.a = a
+  res.locals.b = b
+  res.locals.c = c
+  res.locals.d = d
+  res.locals.e = e
+  res.locals.totalGrades = totalGrades
+  res.render('gpaview')
 })
 
 app.get("/dataDemo", (request,response) => {
