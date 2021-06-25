@@ -81,43 +81,15 @@ app.post("/showformdata", (request,response) => {
   response.render("index")
 })
 
-app.post("/xxx", (request,response) => {
-  response.json(request.body)
-})
-
-app.get("/rest", (request,response) => {
-  response.render("rest")
-})
-
-app.post("/restData", (request,response) => {
-  response.json(request.body)
-})
-
-app.get("/triangleArea", (req, res) => {
-  response.render("triangleArea")
-})
-
-app.post("/calcTriangleArea", (req,res) => {
-  const a = parseFloat(req.body.a)
-  const b = parseFloat(req.body.b)
-  const c = parseFloat(req.body.c)
-  const s = (a+b+c)/2
-  const area = math.sqrt(s*(s-a)*(s-b)*(s-c))
-  res.locals.a = a
-  res.locals.b = b
-  res.locals.c = c
-  res.locals.area = area
-  res.render("showTriangleArea")
-})
-
 app.get('/playerSearch', (req,res) => { 
   res.render('playerSearch') //formerly player is recipe
 })
+
 //formerly getRecipes
 app.post("/getPlayer",   async (req,res,next) => { 
   try { 
-    const food = req.body.food 
-    const balldontlie = "https://www.balldontlie.io/api/v1/players?search="+food+"&per_page=100" 
+    const searchedPlayer = req.body.searchedPlayer 
+    const balldontlie = "https://www.balldontlie.io/api/v1/players?search="+searchedPlayer+"&per_page=100" 
     const myAPI = await axios.get(balldontlie) 
     console.dir(myAPI) 
     console.dir(myAPI.data) 
@@ -152,73 +124,6 @@ app.post("/getPlayer2",   async (req,res,next) => { 
  }) 
 
 
-// Here is where we will explore using forms!
-
-
-
-// this example shows how to get the current US covid data
-// and send it back to the browser in raw JSON form, see
-// https://covidtracking.com/data/api
-// for all of the kinds of data you can get
-app.get("/c19",
-  async (req,res,next) => {
-    try {
-      const url = "https://covidtracking.com/api/v1/us/current.json"
-      const result = await axios.get(url)
-      res.json(result.data)
-    } catch(error){
-      next(error)
-    }
-})
-
-// this shows how to use an API to get recipes
-// http://www.recipepuppy.com/about/api/
-// the example here finds omelet recipes with onions and garlic
-app.get("/omelet",
-  async (req,res,next) => {
-    try {
-      const url = "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3"
-      const result = await axios.get(url)
-      res.json(result.data)
-    } catch(error){
-      next(error)
-    }
-})
-
-// this shows how to use an API to get recipes
-// http://www.recipepuppy.com/about/api/
-// the example here finds omelet recipes with onions and garlic
-// app.get("/stats",
-// console.log("stats pressed")
-//   async (req,res,next) => {
-//     try {
-//       const url = "https://www.balldontlie.io/api/v1/stats"
-//       const result = await axios.get(url)
-//       console.log(result);
-//       res.json(result.data)
-//     } catch(error){
-//       next(error)
-//     }
-// })
-
-// fetch(url, {
-//     method: 'post',
-//     headers: {
-//       "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-//     },
-//     body: 'foo=bar&lorem=ipsum'
-//   })
-//   .then(json)
-//   .then(function (data) {
-//     console.log('Request succeeded with JSON response', data);
-//   })
-//   .catch(function (error) {
-//     console.log('Request failed', error);
-//   });
-
-app.get('/player', (req,res) => { 
-  res.render('player') //formerly player is recipe
-})
 
 var date = new Date();
 var year = date.getFullYear();
