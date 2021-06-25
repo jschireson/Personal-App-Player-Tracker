@@ -69,33 +69,6 @@ body {
 </table>
 
 
-<script>
-
-function addRow() {
-   "use strict";
-
-    var table = document.getElementById("settingsTable");
-
-    var row= document.createElement("tr");
-    console.log(row);
-    var inputName = document.createElement("td");
-    var checkBox = document.createElement("INPUT");
-    checkBox.setAttribute("type", "checkbox");
-    inputName.innerHTML = document.getElementById("textBox").value;
-
-    row.appendChild(checkBox);
-    row.appendChild(inputName);
-
-    row.length += 1;
-
-
-
-
-
-    table.children[1].appendChild(row);
-};
-
-</script>
 
 
 <!-- <p>
@@ -165,13 +138,6 @@ function addRow() {
 </form>
 
 <br>
-
-<div class="input-group">
-  <input type="text" class="form-control" id = "textBox" name="playerName" placeholder="Firstname Lastname">
-  <div class="input-group-append">
-    <button class="btn btn-success" type="submit" onclick="addRow()">Add Row</button>
-  </div>
-</div>
 
 <title>JavaScript - Select/Unselect (Check/Uncheck) all CheckBoxes on Button Click.</title>
 		<script type="text/javascript">
