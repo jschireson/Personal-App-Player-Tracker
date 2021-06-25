@@ -64,13 +64,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/demo",
-        function (req, res){res.render("demo");});
-
-app.get("/about", (request, response) => {
-  response.render("about");
-});
-
 app.get("/userSettings", async(request, response, next) => {
   try{
     response.locals.userSettings = await PlayerDB.find({})
