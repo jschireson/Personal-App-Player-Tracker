@@ -77,37 +77,6 @@ app.get("/userSettings", async(request, response, next) => {
   }
 });
 
-app.get("/gpaform", (request,response) => {
-  response.render("gpaform")
-})
-
-app.post("/gpa",(req,res) => {
-  const a = parseFloat(req.body.a)
-  const b = parseFloat(req.body.b)
-  const c = parseFloat(req.body.c)
-  const d = parseFloat(req.body.d)
-  const e = parseFloat(req.body.e)
-  const totalGrades = (a*4+b*3+c*2+d)
-  res.locals.name = req.body.fullname
-  res.locals.body = req.body
-  res.locals.a = a
-  res.locals.b = b
-  res.locals.c = c
-  res.locals.d = d
-  res.locals.e = e
-  res.locals.totalGrades = totalGrades
-  res.render('gpaview')
-})
-
-app.get("/dataDemo", (request,response) => {
-  response.locals.name="Tim Hickey"
-  response.locals.vals =[1,2,3,4,5]
-  response.locals.people =[
-    {'name':'Tim','age':65},
-    {'name':'Yas','age':29}]
-  response.render("dataDemo")
-})
-
 app.post("/showformdata", (request,response) => {
   response.render("index")
 })
