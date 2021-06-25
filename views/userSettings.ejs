@@ -13,9 +13,38 @@ body {
 
     <h1>Settings</h1>
     <hr>
+<h4>My Players</h4>
 
 <form method="post" action="/showformdata">
-<h4>My Players</h4>
+    length is
+    <%= JSON.stringify(userSettings.length) %>
+    <table class="table table-bordered table-striped">
+        <thead>
+          <tr><th width=10%></th><th>Player</th><th>apikey</th><th>userId</th></tr>
+        </thead>
+        <tbody>
+      <% for(let i=0; i<userSettings.length; i++){
+          getPlayer2 = userSettings[i]
+          console.log(`i=${i} document=${getPlayer2}`)
+      %>
+        <tr>
+          <td>
+            <input type="checkbox" name="player" checked value="<% getPlayer2.first_name + getPlayer2.last_name%>">
+          </td>
+          <td> <!-- click on domainName and see all keys with that domainName  -->
+            <%= getPlayer2.first_name + " " + getPlayer2.last_name%>
+          </td>
+          <td><%= getPlayer2.last_name %></td>
+          <td>
+              <!--  only the owner can delete an apikey  -->
+              <% if (getPlayer2.first_name=="Ben") {%>
+                <p>im Ben</p>
+          <%}%>
+          </td>
+
+        </tr>
+      <%}%>
+
 <table id = "settingsTable" class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -38,6 +67,7 @@ body {
     </tr>
   </tbody>
 </table>
+
 
 <script>
 
@@ -90,27 +120,27 @@ function addRow() {
   </thead>
   <tbody>
     <tr>
-      <td><input type="checkbox" name="statistics" value="pts"></td>
+      <td><input type="checkbox" checked name="statistics" value="pts"></td>
       <td>Points</td>
     </tr>
     <tr>
-      <td><input type="checkbox" name="statistics" value="reb"></td>
+      <td><input type="checkbox" checked name="statistics" value="reb"></td>
       <td>Rebounds</td>
     </tr>
     <tr>
-      <td><input type="checkbox" name="statistics" value="ast"></td>
+      <td><input type="checkbox" checked name="statistics" value="ast"></td>
       <td>Assists</td>
     </tr>
     <tr>
-      <td><input type="checkbox" name="statistics" value="stl"></td>
+      <td><input type="checkbox" checked name="statistics" value="stl"></td>
       <td>Steals</td>
     </tr>
     <tr>
-      <td><input type="checkbox" name="statistics" value="blk"></td>
+      <td><input type="checkbox" checked name="statistics" value="blk"></td>
       <td>Blocks</td>
     </tr>
     <tr>
-      <td><input type="checkbox" name="statistics" value="eff"></td>
+      <td><input type="checkbox" checked name="statistics" value="eff"></td>
       <td>Efficiency</td>
     </tr>
   </tbody>

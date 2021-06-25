@@ -71,8 +71,17 @@ app.get("/about", (request, response) => {
   response.render("about");
 });
 
-app.get("/userSettings", (request, response) => {
-  response.render("userSettings");
+app.get("/userSettings", async(request, response, next) => {
+  try{
+    response.locals.userSettings = await PlayerDB.find({})
+    console.log("finding")
+    console.log(response.locals.userSettings.length)
+    response.render("userSettings")
+  }
+  catch(error){
+    console.log(error)
+    next(error)
+  }
 });
 
 app.get("/gpaform", (request,response) => {
@@ -107,7 +116,7 @@ app.get("/dataDemo", (request,response) => {
 })
 
 app.post("/showformdata", (request,response) => {
-  response.json(request.body)
+  response.render("index")
 })
 
 app.post("/xxx", (request,response) => {
@@ -157,6 +166,26 @@ app.post("/getPlayer",   async (req,res,next) => { 
     //res.json(result.data) 
     res.render('displayPlayer') //formerly showRecipes
   } catch(error){ 
+    next(error)     }
+ }) 
+
+const PlayerDB = require("./models/PlayerDB")
+app.post("/getPlayer2",   async (req,res,next) => { 
+  try { 
+    const first_name = req.body.first_name
+    const last_name = req.body.last_name
+    console.log("XFDS")
+    const myPlayer = new PlayerDB({
+      first_name:first_name,
+      last_name:last_name
+    })
+    const done = await myPlayer.save()
+    console.log('result=')
+    console.dir(done)
+    res.redirect('/userSettings')
+
+  } catch(error){ 
+    console.log("error in getPlayer2")
     next(error)     }
  }) 
 
