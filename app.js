@@ -108,7 +108,6 @@ app.post("/getPlayer2",   async (req,res,next) => { 
   try { 
     const first_name = req.body.first_name
     const last_name = req.body.last_name
-    console.log("XFDS")
     const myPlayer = new PlayerDB({
       first_name:first_name,
       last_name:last_name
