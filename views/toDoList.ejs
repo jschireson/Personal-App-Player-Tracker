@@ -1,0 +1,75 @@
+<%- include('bootheader') -%>
+
+<%- include('menubar') -%>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Rajdhani', sans-serif;
+}
+</style>
+</head>
+
+  <div class="jumbotron">
+    <h1> ToDo List for <%= user.googlename %> </h1>
+    <p> Here is your list of things to do! </p>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>remove</th>
+          <th>Player</th>
+          <th>Player ID Number</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% let numTodo=0
+           items.forEach(item => {
+           if (!item.completed) {
+               numTodo += 1
+           }
+          %>
+
+        <tr>
+          <td>
+            <a href="/todo/remove/<%=item._id %>">
+              <button type="button" name="button" class = "btn btn-outline-danger btn-sm">remove</button>
+            </a>
+          </td>
+          <td><%= item.item %></td>
+          <td><%= item.idNumber %></td>
+        </tr>
+
+        <% if (item.completed) {%>
+            <a href="/todo/switchComplete/<%= item._id %>">
+                done
+            </a>
+        <% } else {%>
+            <a href="/todo/switchComplete/<%= item._id %>">
+                todo
+            </a>
+        <%}%>
+   <% }) %>
+      </tbody>
+    </table>
+
+
+
+
+
+      <form method="post" action="todo">
+          new item: <input type="text" name="item"><br>
+          <input type="submit" value="store">
+      </form>
+
+      <% if (numTodo==0) {%>
+          <h3>Congratulations!!</h3>
+              You completed all of your tasks!
+      <%}%>
+
+  </div>
+
+  <%- include('bootfooter') -%>

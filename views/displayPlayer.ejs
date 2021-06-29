@@ -14,18 +14,16 @@ body {
   <h1>Player Finder</h1> 
 </div>
 
- <form method="post" action="/getPlayer2"> 
-  Add Another Player <br>
-  First Name <input type="text" name="first_name"><br>
-  Last Name <input type="text" name="last_name"> <br> 
-  <br>
-  <input type="submit"> 
-</form>
+
+<!-- <form method="post" action="todo">
+    todoStore: <input type="text" name="item"><br>
+    <input type="submit" value="store">
+</form> -->
 
   <% myAPI.map((player) => {%> 
 
   <div class="content">
-      <img src="https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3202.png"/ alt="" >
+      <img src="https://lh3.googleusercontent.com/proxy/ikHKZlxz7XqQA0XSgjdbLNUODmUZIXZUq3uPoFj08GzTJQRHuiD1pV3dsyTtqW8s4MbhmmD4aEimDb_35srseWHtpp_ivswfdo5xBlXZcK3mWWqOHQ-S4M0MeH8Jwg"/ alt="" >
       <div class="playerBio">
         <h3><%= player.first_name + " " + player.last_name%></h3>
         <h4><b><%= player.team.abbreviation + " - " +  player.position%></b>
@@ -34,13 +32,19 @@ body {
         <!-- add game score -->
       </div>
 
-      <div class="playerStats">
-        <button type="button" class="btn btn-success">Add</button>
-      </div>
+      <form method="post" action="todo">
+          <input type="hidden" name="item" value = "<%= player.first_name + " " + player.last_name%>"><br>
+          <input type="hidden" name="idNumber" value = "<%=player.id%>"><br>
+          <input class="btn btn-success" type="submit" value="Add">
+
+
+
+</form>
   </div>
 
 
   <hr>
  <%})%>  
+
 
   <%- include('bootfooter') -%> 

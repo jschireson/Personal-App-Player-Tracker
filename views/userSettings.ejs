@@ -18,6 +18,7 @@ body {
 <form method="post" action="/showformdata">
     length is
     <%= JSON.stringify(userSettings.length) %>
+
     <table class="table table-bordered table-striped">
         <thead>
           <tr><th width=10%></th><th>Player</th><th>apikey</th><th>userId</th></tr>
@@ -68,7 +69,92 @@ body {
   </tbody>
 </table>
 
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Manage Player List
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
 
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th width=10%>checkbox</th>
+            <th>Player</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" name="player" value="durant"></td>
+            <td>Kevin Durant</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="player" value="curry"></td>
+            <td>Stephen Curry</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="player" value="jokic"></td>
+            <td>Nikola Jokic</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Manage Statistics List
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th width=10%>checkbox</th>
+              <th>Statistics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="pts"></td>
+              <td>Points</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="reb"></td>
+              <td>Rebounds</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="ast"></td>
+              <td>Assists</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="stl"></td>
+              <td>Steals</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="blk"></td>
+              <td>Blocks</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked name="statistics" value="eff"></td>
+              <td>Efficiency</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
 
 
 <!-- <p>

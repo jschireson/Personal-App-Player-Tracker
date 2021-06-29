@@ -20,15 +20,20 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="/todo">todo</a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link"><b>Add Player:</b></a>
       </li>
+
 
 <form method="post" action="/getPlayer" class="form-inline">
   <div class="input-group">
     <input type="text" class="form-control" name="searchedPlayer" placeholder="Firstname Lastname">
     <div class="input-group-append">
       <button class="btn btn-secondary"
-              type="submit">
+              type="submit" value = "Search">
               <img
               src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png"
               alt=""
@@ -39,7 +44,13 @@
   </div>
 </form>
 
+<li class="nav-item">
+  <a class="nav-link" href="/logout">logout</a>
+</li>
 
+<li class="nav-item">
+  <a class="nav-link"><%=user.googlename%></a>
+</li>
 
 </ul>
 </div>

@@ -9,6 +9,12 @@ db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
+const User = require('./models/User');
+
+const authRouter = require('./routes/authentication');
+const isLoggedIn = authRouter.isLoggedIn
+
+const toDoRouter = require('./routes/todo');
 
 /*
   app.js -- This creates an Express webserver
@@ -59,14 +65,18 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(authRouter)
+
 // here we start handling routes
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.use('/todo',toDoRouter);
+
 app.get("/userSettings", async(request, response, next) => {
   try{
-    response.locals.userSettings = await PlayerDB.find({})
+    response.locals.userSettings = await PlayerDB.find({userId:request.user._id})
     console.log("finding")
     console.log(response.locals.userSettings.length)
     response.render("userSettings")
@@ -85,23 +95,40 @@ app.get('/playerSearch', (req,res) => { 
   res.render('playerSearch') //formerly player is recipe
 })
 
-//formerly getRecipes
+//Search Bar
 app.post("/getPlayer",   async (req,res,next) => { 
   try { 
     const searchedPlayer = req.body.searchedPlayer 
     const balldontlie = "https://www.balldontlie.io/api/v1/players?search="+searchedPlayer+"&per_page=100" 
     const myAPI = await axios.get(balldontlie) 
+
+    console.log('myAPI') 
     console.dir(myAPI) 
+    console.log('myAPI.data') 
     console.dir(myAPI.data) 
-    console.log('results') 
-    console.log('results') 
+    console.log('myAPI.data.data') 
     console.dir(myAPI.data.data) 
+
     res.locals.myAPI = myAPI.data.data
-    //res.json(result.data) 
-    res.render('displayPlayer') //formerly showRecipes
+
+    res.render('displayPlayer')  //render search results
   } catch(error){ 
     next(error)     }
  }) 
+
+
+
+
+
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
+
+//date self explanatory, player id is paul george
+//https://balldontlie.io/api/v1/stats?start_date=2021-06-28&player_ids[]=172
 
 const PlayerDB = require("./models/PlayerDB")
 app.post("/getPlayer2",   async (req,res,next) => { 
@@ -110,7 +137,8 @@ app.post("/getPlayer2",   async (req,res,next) => { 
     const last_name = req.body.last_name
     const myPlayer = new PlayerDB({
       first_name:first_name,
-      last_name:last_name
+      last_name:last_name,
+      userId: ObjectId
     })
     const done = await myPlayer.save()
     console.log('result=')
@@ -205,7 +233,7 @@ app.use(function(err, req, res, next) {
 });
 
 //Here we set the port to use
-const port = "4000";
+const port = "5000";
 app.set("port", port);
 
 // and now we startup the server listening on that port

@@ -5,7 +5,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 var playerDBSchema = Schema( {
   first_name: String,
-  last_name: String
+  last_name: String,
+  userId: ObjectId
 } );
 
 module.exports = mongoose.model( 'PlayerDB', playerDBSchema );
